@@ -118,6 +118,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'indie_static'),
 )
 
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
 FACEBOOK_APP_ID = '963733013685245'
 FACEBOOK_API_SECRET = '8635445eee743ec5d144035a19150fa4'
 
