@@ -1,0 +1,35 @@
+
+.banner {
+    text-align: center !important;
+    color: white;
+    background-image: url("http://images2.alphacoders.com/469/469427.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.banner .jumbotron {
+    background-color: rgba(0, 0, 0, 0.65);
+    padding-top: 16%;
+    padding-bottom: 20%;
+    height: 100vh;
+}
+
+.social-icon-footer i {
+    text-align: center;
+    width: 20px;
+    height: 20px;
+}
+.footer h4 {
+    margin-top: 11px;
+    margin-bottom: 11px;
+    text-align: right;
+}
+
+/*
+.call_to_action .fa {
+  font-size: 50px;
+  border-radius: 200px;
+  border: 30px solid #fc9a00;
+  background: #fc9a00;
+}*/

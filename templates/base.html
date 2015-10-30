@@ -1,0 +1,132 @@
+{% extends 'bootstrap3/bootstrap3.html' %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block bootstrap3_title %}{% block title %}{% endblock title %} | SmarTuurs{% endblock bootstrap3_title %}
+
+{% block bootstrap3_extra_base_head %}
+{#    <link class="simplex-sheet" href="{% static 'bootstrap/bootstrap-simplex.min.css' %}" media="all" rel="stylesheet">#}
+{#    <link class="simplex-sheet" href="{% static 'bootstrap/bootstrap-flatly.min.css' %}" media="all" rel="stylesheet">#}
+    <link href="{% static 'css/main.css' %}" media="all" rel="stylesheet">
+{#    <link href="{% static 'css/main-simplex.css' %}" media="all" rel="stylesheet">#}
+{#    <link href="{% static 'css/main-flatly.css' %}" media="all" rel="stylesheet">#}
+    <!-- FAVICON -->
+{#    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">#}
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--CDN link for the latest TweenMax-->
+{#    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>#}
+
+{#    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>#}
+    <script type="text/javascript" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
+    <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+{#    <script type="text/javascript" src="{% static 'js/jquery.aniview.min.js' %}"></script>#}
+{% endblock %}
+
+{% block bootstrap3_content %}
+    {% if DEBUG %}
+        <span class="label label-warning debug-warning">DEMO MODE</span>
+    {% endif %}
+    <nav class="navbar navbar-fixed-top navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <!-- Collapse buttons -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!-- /Collapse buttons -->
+                <a class="navbar-brand" href="{% url 'homepage' %}">
+                    SmarTuurs
+                    {#<img id="logo" src="{% static "img/sawc-logo.png" %}">#}
+                </a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#">
+                            About
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Services
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Contact
+                        </a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                               aria-expanded="false">
+                                <i class="fa fa-user"></i> Welcome {{ user.get_short_name }} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+{#                                <li><a href="{% url 'profile-detail' %}">Profile</a></li>#}
+                                <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+                                <li><a href="{% url 'account_email' %}">Manage Email Addresses</a></li>
+                                {% if user.is_staff or user.is_superuser %}
+                                    <li><a target="_blank" href="{% url 'admin:index' %}">Admin</a></li>
+                                {% endif %}
+                                <li class="divider"></li>
+                                <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li><a id="login" href="{% url 'account_login' %}">LOGIN</a></li>
+                        <li><a id="register" href="{% url 'account_signup' %}">SIGN UP</a></li>
+{#                        {% load socialaccount %}#}
+{#                        <a href="{% provider_login_url "facebook" method="oauth2" next="/"%}">Facebook</a>#}
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    {% bootstrap_messages %}
+
+    {% block home_content %}
+    {% endblock home_content %}
+
+    <div class="container">
+        {% block content %}
+        {% endblock content %}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <p class="text-muted" style="margin-top: 11px; margin-bottom: 11px;">
+                        <small><i class="fa fa-copyright"></i> 2015 SmarTuurs</small>
+                    </p>
+                </div>
+                <div class="col-md-4 col-md-offset-4">
+                    <h4>
+                        <a class="social-icon-footer" target="_blank" href="https://www.facebook.com/">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a class="social-icon-footer" target="_blank" href="https://twitter.com/">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a class="social-icon-footer" target="_blank"
+                           href="https://plus.google.com/">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a class="social-icon-footer" target="_blank" href="https://www.linkedin.com/company/">
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </h4>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+{% endblock bootstrap3_content %}

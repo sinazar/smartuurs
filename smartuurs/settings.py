@@ -31,13 +31,30 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'django.contrib.sites',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #
+    'bootstrap3',
+    'bootstrapform',
+    'django_extensions',
+    # 'bootstrap3_datetime',
+    #
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'social_auth',
+    #
+    'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.twitter',
 )
+
+SITE_ID = 1
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -55,7 +72,7 @@ ROOT_URLCONF = 'smartuurs.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -63,13 +80,48 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.core.context_processors.request',
             ],
         },
     },
 ]
 
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    'social_auth.backends.OpenIDBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+)
+
+BOOTSTRAP3 = {
+    'javascript_in_head': True,
+}
+
+LOGIN_REDIRECT_URL = '/'
+# Django all auth settings
+ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_DISPLAY = lambda user: user.get_full_name()
+ACCOUNT_EMAIL_VERIFICATION = "optional"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "SmarTuurs - "
+ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
+# ACCOUNT_SIGNUP_FORM_CLASS = "user_manager.forms.MySignupForm"
+
 WSGI_APPLICATION = 'smartuurs.wsgi.application'
 
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'indie_static'),
+)
+
+FACEBOOK_APP_ID = '963733013685245'
+FACEBOOK_API_SECRET = '8635445eee743ec5d144035a19150fa4'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
