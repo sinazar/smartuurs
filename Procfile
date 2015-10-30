@@ -1,0 +1,1 @@
+web: gunicorn smartuurs.wsgi --log-file -
