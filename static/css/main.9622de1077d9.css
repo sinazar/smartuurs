@@ -1,0 +1,30 @@
+body { margin-top: 50px; }
+
+/*.navbar.navbar-fixed-top.navbar-white {
+    border-top: 10px solid black;
+    width: 100%;
+}*/
+
+.center {
+    margin: 0 auto;
+    float: none;
+    text-align: center;
+}
+
+/*
+.center img {
+    width: 40%;
+}*/
+
+.login-window{
+  padding-top:2%;
+}
+
+footer {
+    width: 100%;
+    background-color: #EEE;
+    position: absolute;
+    bottom: -150px;
+    height: auto;
+    margin-top: 30px;
+}
